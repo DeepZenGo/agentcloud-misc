@@ -1,0 +1,54 @@
+# IBKR Options Agent — default config (paper / dry-run friendly)
+# Inspired by the "Codex earns its own Token" style loop:
+# watch market → LLM decides → place/manage options → journal P/L
+
+account:
+  # Leave empty to use the first managed account from IBKR
+  account_id: ""
+  currency: USD
+
+universe:
+  # Underlyings the agent may trade options on
+  underlyings:
+    - RIVN
+    - TSLA
+    - NVDA
+  # Confirmation symbols (like QQQ / SMH in the Day-6 writeup)
+  confirmations:
+    - QQQ
+    - SMH
+
+options:
+  # Prefer near-term liquid strikes
+  max_dte_days: 45
+  min_dte_days: 3
+  # Strike selection window around spot (percent)
+  strike_band_pct: 15
+  right: C  # C or P; agent may override per decision
+  exchange: SMART
+  trading_class: ""  # leave blank; IBKR will resolve
+
+risk:
+  # Hard caps — the Day-6 example used ~41% on one name; we default much tighter
+  max_position_pct: 0.15          # max notional premium / equity per new trade
+  max_total_options_pct: 0.40     # sum of open option premiums / equity
+  max_contracts_per_order: 5
+  max_orders_per_day: 8
+  min_account_equity: 200         # refuse to trade below this
+  allow_live: false               # must flip true + DRY_RUN=false for live
+
+loop:
+  poll_seconds: 60
+  market_hours_only: true
+  timezone: America/New_York
+  # Session window (local to timezone)
+  session_start: "09:35"
+  session_end: "15:50"
+
+journal:
+  path: logs/journal.jsonl
+  daily_summary_path: logs/daily_summary.md
+
+agent:
+  temperature: 0.2
+  max_tokens: 1200
