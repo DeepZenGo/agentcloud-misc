@@ -4,6 +4,8 @@
 
 > 一个项目目录满了，零碎的工作就不会散落在各处。
 
+任务清单与约定见 **[TASKS.md](./TASKS.md)**：一任务一文件夹，随时可能转正迁出。
+
 ---
 
 ## 设计原则
@@ -12,6 +14,7 @@
 |------|------|
 | **低门槛** | 不需要完整项目脚手架，脚本即文件 |
 | **可追溯** | 每个脚本/配置/文档都要标用途和日期 |
+| **一任务一目录** | 每个任务有自己的文件夹；成熟后随时可能迁出转正为独立项目 |
 | **用完即走** | 实验性成果或沉淀成独立项目，或归档到 `archived/` |
 | **能跑就够** | 不追求工程完美，能解决问题就行 |
 
@@ -20,7 +23,10 @@
 ```
 agentcloud-misc/
 ├── README.md           # 本文件
-├── scripts/            # 一次性/临时脚本
+├── TASKS.md            # 任务说明 + 目录清单
+├── tasks/              # 每个任务一个独立子文件夹
+│   └── <task-name>/
+├── scripts/            # 一次性/临时脚本（非任务型零碎）
 │   ├── 2026-07-10_xxx.sh  # 带日期的命名惯例
 │   └── ...
 ├── configs/            # 配置文件片段、template、env 示例
@@ -31,6 +37,7 @@ agentcloud-misc/
 
 ### 命名惯例
 
+- **任务目录**: `tasks/<简短英文或拼音名>/`（见 [TASKS.md](./TASKS.md)）
 - **脚本**: `YYYY-MM-DD_简短描述.后缀`
 - **配置**: `用途.后缀`（如 `openrouter-templates.yaml`）
 - **文档**: `YYYY-MM-DD_主题.md`
@@ -39,6 +46,7 @@ agentcloud-misc/
 
 ✅ **合适入住的租户：**
 
+- 有明确边界、可能日后转正的小任务 → `tasks/<task-name>/`
 - 一次性的数据清洗/迁移脚本
 - 临时 API 集成测试
 - Agent 编排的实验性 prompt/skill 草案
@@ -55,44 +63,54 @@ agentcloud-misc/
 
 ## 使用指南
 
-### 添加新活
+### 添加新任务
 
 ```bash
-# 1. 创建一个带日期的脚本
+# 1. 为任务建独立目录
+mkdir -p tasks/<task-name>
+
+# 2. 在目录内放脚本/配置/笔记，并在 TASKS.md 登记
+
+# 3. 提交
+git add -A
+git commit -m "add: <task-name> 简短描述"
+git push
+```
+
+### 添加零碎脚本（非任务型）
+
+```bash
 touch scripts/$(date +%Y-%m-%d)_简短描述.sh
 chmod +x $_
-
-# 2. 写完后提交
-git add -A
-git commit -m "add: 简短描述"
-git push
 ```
 
 ### 存档旧活
 
-定期（建议每季度）清理 `scripts/`，把不再有用的挪到 `archived/` 或删除：
+定期（建议每季度）清理，把不再有用的挪到 `archived/` 或删除：
 
 ```bash
 mkdir -p archived/2026-Q2
+mv tasks/<旧任务名> archived/2026-Q2/
+# 或
 mv scripts/2026-01-* archived/2026-Q2/
 ```
 
-### 沉淀为独立项目
+### 沉淀为独立项目（转正）
 
-当一个脚本/工具开始被频繁使用、需要 issue 管理、或需要 CI：
+当一个任务开始被频繁使用、需要 issue 管理、或需要 CI：
 
-1. 在本仓库记一笔迁移记录
+1. 在 [TASKS.md](./TASKS.md) 将该任务标为「已转正」并记迁移链接
 2. 创建独立 repo
-3. 从 `archived/` 引用链接
+3. 原目录挪到 `archived/` 或删除
 
 ---
 
 ## 当前内容
 
 <!-- 用 `tree --gitignore` 自动更新 -->
-<!-- 手动维护的清单，每次提交后顺手更新 -->
+<!-- 手动维护的清单，每次提交后顺手更新；任务明细以 TASKS.md 为准 -->
 
-暂无（新仓库）。
+暂无（新仓库）。详见 [TASKS.md](./TASKS.md)。
 
 ---
 
