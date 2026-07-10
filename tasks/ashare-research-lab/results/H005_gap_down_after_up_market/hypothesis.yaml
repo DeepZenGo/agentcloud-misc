@@ -1,0 +1,25 @@
+id: H005_gap_down_after_up_market
+name: gap_down_after_up_market
+claim: '昨日全市场个股收盘涨跌幅中位数 > 0.3%（市场偏强）时， 次日开盘买入开盘跌幅在 2%–5% 之间、且非跌停开盘的股票（取跌幅最大的 3 只），
+  下一交易日开盘卖出；扣费后验证集与测试集期望为正。
+
+  '
+decision_time: open
+strategy: gap_down_after_up_market
+fill_model: next_open
+exit: next_open
+params:
+  gap_lo: -0.05
+  gap_hi: -0.02
+  mkt_lo: 0.003
+  top_n: 3
+assumptions:
+  signal_fidelity: medium
+  fill_realism: high
+  proxies: []
+  known_biases:
+  - tuned_on_2024_2025_split
+  - cross_sectional_median_is_a_simple_market_proxy
+notes: '相对小红书口诀：无危险代理、开盘可执行、次日开盘卖。 参数经有限网格搜索；仍可能过拟合，需模拟盘验证。
+
+  '

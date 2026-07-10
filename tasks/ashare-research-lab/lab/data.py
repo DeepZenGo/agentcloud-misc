@@ -90,6 +90,12 @@ def load_panel(cfg: dict | None = None) -> pd.DataFrame:
     df["next_low"] = df.groupby("code")["low"].shift(-1)
     df["next_close"] = df.groupby("code")["close"].shift(-1)
     df["next2_open"] = df.groupby("code")["open"].shift(-2)
+    # market context known at open: yesterday's cross-sectional median close return
+    df["prev_close_ret"] = df.groupby("code")["close_ret"].shift(1)
+    mkt_prev = df.groupby("date")["prev_close_ret"].transform("median")
+    df["mkt_prev_median"] = mkt_prev
+    # optional contemporaneous open median (same 09:30 cross-section)
+    df["mkt_open_median"] = df.groupby("date")["open_ret"].transform("median")
 
     if open5_path is not None:
         o5 = pd.read_parquet(open5_path)

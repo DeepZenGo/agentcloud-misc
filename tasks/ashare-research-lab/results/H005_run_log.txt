@@ -1,0 +1,11 @@
+hypothesis=H005_gap_down_after_up_market strategy=gap_down_after_up_market decision=open
+lint ok=True errors=[]
+assumptions grade=honest candidate=True errors=[]
+loading panel ...
+panel codes=4229 days=485 train=2024-01-02..2025-04-21 val=2025-04-22..2025-08-05 test=2025-08-11..2025-12-31
+  train: trades=370 exp=0.002851321953265668 dd=-0.3147559120506944
+  val: trades=93 exp=0.002116147233438605 dd=-0.20181966964861175
+  test: trades=99 exp=0.0039836569949440095 dd=-0.13386029654388876
+metric gates ok=True errors=[]
+verdict=CANDIDATE
+report -> /workspace/tasks/ashare-research-lab/results/H005_gap_down_after_up_market/report.md

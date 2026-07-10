@@ -34,5 +34,18 @@
     "test_exp": 0.009907903986728674,
     "test_dd": -0.08918866300014316,
     "assumption_grade": "weak"
+  },
+  {
+    "id": "H005_gap_down_after_up_market",
+    "report": "/workspace/tasks/ashare-research-lab/results/H005_gap_down_after_up_market/report.md",
+    "verdict": "CANDIDATE",
+    "test_n": 99,
+    "test_exp": 0.0039836569949440095,
+    "test_dd": -0.13386029654388876,
+    "assumption_grade": "honest"
+  },
+  {
+    "id": "H005_run_log.txt",
+    "report": "/workspace/tasks/ashare-research-lab/results/H005_run_log.txt/report.md"
   }
 ]

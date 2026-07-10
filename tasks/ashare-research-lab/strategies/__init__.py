@@ -154,9 +154,69 @@ class LimitUpAmountBoard:
         return sigs
 
 
+class GapDownAfterUpMarket:
+    """
+    Honest open mean-reversion:
+    - Yesterday cross-sectional median close_ret > mkt_lo (known at open)
+    - Today open_ret in [gap_lo, gap_hi] (e.g. -5%..-2%), not limit-down
+    - Buy open, sell next open; take the most depressed top_n names
+    """
+
+    name = "gap_down_after_up_market"
+    required_columns = [
+        "open_ret",
+        "mkt_prev_median",
+        "is_limit_down_open",
+        "next_open",
+    ]
+    decision_columns = ["open_ret", "mkt_prev_median", "is_limit_down_open"]
+
+    def __init__(
+        self,
+        gap_lo: float = -0.05,
+        gap_hi: float = -0.02,
+        mkt_lo: float = 0.003,
+        top_n: int = 3,
+        boards: tuple[str, ...] | None = None,
+    ):
+        self.gap_lo = gap_lo
+        self.gap_hi = gap_hi
+        self.mkt_lo = mkt_lo
+        self.top_n = top_n
+        self.boards = boards
+
+    def generate(self, panel: pd.DataFrame) -> list[Signal]:
+        sigs: list[Signal] = []
+        for d, day in panel.groupby("date"):
+            g = day
+            if self.boards:
+                g = g[g["code"].str.startswith(self.boards)]
+            cand = g[
+                (g["open_ret"] >= self.gap_lo)
+                & (g["open_ret"] <= self.gap_hi)
+                & (g["mkt_prev_median"] > self.mkt_lo)
+                & (~g["is_limit_down_open"])
+            ]
+            cand = cand.sort_values("open_ret").head(self.top_n)
+            for _, r in cand.iterrows():
+                sigs.append(
+                    Signal(
+                        date=pd.Timestamp(d),
+                        code=r["code"],
+                        strength=-float(r["open_ret"]),
+                        meta={
+                            "open_ret": float(r["open_ret"]),
+                            "mkt_prev_median": float(r["mkt_prev_median"]),
+                        },
+                    )
+                )
+        return sigs
+
+
 REGISTRY = {
     OpenGapHotNoLookahead.name: OpenGapHotNoLookahead,
     OpenGapHotLookaheadBad.name: OpenGapHotLookaheadBad,
     LimitDownBounceWatchlist.name: LimitDownBounceWatchlist,
     LimitUpAmountBoard.name: LimitUpAmountBoard,
+    GapDownAfterUpMarket.name: GapDownAfterUpMarket,
 }
