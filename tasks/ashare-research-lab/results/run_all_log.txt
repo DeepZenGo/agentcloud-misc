@@ -1,0 +1,35 @@
+============================================================ H001_open_gap_hot.yaml
+hypothesis=H001_open_gap_hot_no_lookahead strategy=open_gap_hot_no_lookahead decision=open
+lint ok=True errors=[] warnings=["required_columns not listed in decision_columns: ['next_open']"]
+loading panel ...
+panel codes=4229 days=485 train=2024-01-02..2025-04-21 val=2025-04-22..2025-08-05 test=2025-08-11..2025-12-31
+  train: trades=289 exp=-0.006382254712911516 dd=-0.7935643846181045
+  val: trades=86 exp=-0.00973863797965938 dd=-0.4390220944328299
+  test: trades=107 exp=0.003861012937067723 dd=-0.17197147378217081
+gates ok=False errors=['val expectancy=-0.0097 < min_expectancy', 'val profit_factor=0.690 < min_profit_factor', 'val max_drawdown=-0.439 worse than gate -0.35'] warnings=['train expectancy=-0.0064 < 0 — unstable / regime-dependent']
+report -> /workspace/tasks/ashare-research-lab/results/H001_open_gap_hot_no_lookahead/report.md
+============================================================ H002_lookahead_bad.yaml
+hypothesis=H002_lookahead_bad_demo strategy=open_gap_hot_lookahead_bad decision=open
+lint ok=False errors=["open decision uses same-day EOD fields: ['vol_ratio_eod']"] warnings=[]
+ABORT: lookahead lint failed (pass --force to run anyway)
+============================================================ H003_limit_down.yaml
+hypothesis=H003_limit_down_bounce strategy=limit_down_bounce_watchlist decision=open
+lint ok=True errors=[] warnings=["required_columns not listed in decision_columns: ['high', 'next_open']"]
+loading panel ...
+panel codes=4229 days=485 train=2024-01-02..2025-04-21 val=2025-04-22..2025-08-05 test=2025-08-11..2025-12-31
+  train: trades=3 exp=0.028500000000000025 dd=0.0
+  val: trades=0 exp=nan dd=0.0
+  test: trades=1 exp=-0.03462883435582825 dd=0.0
+gates ok=False errors=['test n_trades=1 < min=30', 'test expectancy=-0.0346 < min_expectancy', 'test profit_factor=0.000 < min_profit_factor', 'val n_trades=0 < min=15'] warnings=[]
+report -> /workspace/tasks/ashare-research-lab/results/H003_limit_down_bounce/report.md
+============================================================ H004_limit_up_board.yaml
+hypothesis=H004_limit_up_amount_board strategy=limit_up_amount_board decision=close
+lint ok=True errors=[] warnings=["required_columns not listed in decision_columns: ['next_open']"]
+loading panel ...
+panel codes=4229 days=485 train=2024-01-02..2025-04-21 val=2025-04-22..2025-08-05 test=2025-08-11..2025-12-31
+  train: trades=484 exp=0.006988118429995394 dd=-0.2579377532290288
+  val: trades=164 exp=0.004783341465401942 dd=-0.1491982452571443
+  test: trades=277 exp=0.009907903986728674 dd=-0.08918866300014316
+gates ok=True errors=[] warnings=[]
+report -> /workspace/tasks/ashare-research-lab/results/H004_limit_up_amount_board/report.md
+index -> /workspace/tasks/ashare-research-lab/results/index.json
