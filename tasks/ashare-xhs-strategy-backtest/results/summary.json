@@ -1,79 +1,90 @@
 {
+  "A_open5m_vol_ratio_20_60":{
+    "n_trades":26.0,
+    "win_rate":0.4615384615,
+    "avg_return":0.0091036038,
+    "expectancy":0.0091036038,
+    "avg_win":0.077885591,
+    "avg_loss":-0.0498523852,
+    "profit_factor":1.3391350827,
+    "total_return":0.0214457546,
+    "max_drawdown":-0.1333590813
+  },
   "A_intraday_thresholds_on_daily":{
     "n_trades":0.0,
     "win_rate":null,
     "avg_return":null,
     "expectancy":null,
-    "total_return":0.0,
-    "max_drawdown":0.0,
-    "profit_factor":null,
     "avg_win":null,
-    "avg_loss":null
+    "avg_loss":null,
+    "profit_factor":null,
+    "total_return":0.0,
+    "max_drawdown":0.0
   },
   "A_daily_vol_proxy_3_8":{
     "n_trades":365.0,
     "win_rate":0.504109589,
     "avg_return":0.0065111429,
     "expectancy":0.0065111429,
-    "total_return":0.5577281608,
-    "max_drawdown":-0.6705586978,
-    "profit_factor":1.2953795296,
     "avg_win":0.0566433461,
-    "avg_loss":-0.0444519809
+    "avg_loss":-0.0444519809,
+    "profit_factor":1.2953795296,
+    "total_return":0.5577281608,
+    "max_drawdown":-0.6705586978
   },
   "A_no_lookahead":{
     "n_trades":482.0,
     "win_rate":0.3858921162,
     "avg_return":-0.0047071911,
     "expectancy":-0.0047071911,
-    "total_return":-0.8488612981,
-    "max_drawdown":-0.8818258006,
-    "profit_factor":0.8301593795,
     "avg_win":0.0596232757,
-    "avg_loss":-0.0451310654
+    "avg_loss":-0.0451310654,
+    "profit_factor":0.8301593795,
+    "total_return":-0.8488612981,
+    "max_drawdown":-0.8818258006
   },
   "B_limit_down_bounce":{
     "n_trades":4.0,
     "win_rate":0.75,
     "avg_return":0.0127177914,
     "expectancy":0.0127177914,
-    "total_return":0.0101203325,
-    "max_drawdown":-0.0069257669,
-    "profit_factor":2.469040659,
     "avg_win":0.0285,
-    "avg_loss":-0.0346288344
+    "avg_loss":-0.0346288344,
+    "profit_factor":2.469040659,
+    "total_return":0.0101203325,
+    "max_drawdown":-0.0069257669
   },
   "B_all_open_limit_down":{
     "n_trades":882.0,
     "win_rate":0.5736961451,
     "avg_return":-0.0173664386,
     "expectancy":-0.0173664386,
-    "total_return":-0.9593871615,
-    "max_drawdown":-0.9602199317,
-    "profit_factor":0.4829087292,
     "avg_win":0.028270057,
-    "avg_loss":-0.0787815099
+    "avg_loss":-0.0787815099,
+    "profit_factor":0.4829087292,
+    "total_return":-0.9593871615,
+    "max_drawdown":-0.9602199317
   },
   "C_limit_up_optimistic":{
     "n_trades":934.0,
     "win_rate":0.534261242,
     "avg_return":0.0075119534,
     "expectancy":0.0075119534,
-    "total_return":7.8961235711,
-    "max_drawdown":-0.2579377532,
-    "profit_factor":1.6275863127,
     "avg_win":0.0364644595,
-    "avg_loss":-0.0257002318
+    "avg_loss":-0.0257002318,
+    "profit_factor":1.6275863127,
+    "total_return":7.8961235711,
+    "max_drawdown":-0.2579377532
   },
   "C_limit_up_conservative":{
     "n_trades":934.0,
     "win_rate":0.534261242,
     "avg_return":0.0075119534,
     "expectancy":0.0075119534,
-    "total_return":7.8961235711,
-    "max_drawdown":-0.2579377532,
-    "profit_factor":1.6275863127,
     "avg_win":0.0364644595,
-    "avg_loss":-0.0257002318
+    "avg_loss":-0.0257002318,
+    "profit_factor":1.6275863127,
+    "total_return":7.8961235711,
+    "max_drawdown":-0.2579377532
   }
 }

@@ -108,7 +108,7 @@ mv scripts/2026-01-* archived/2026-Q2/
 
 | 任务 | 路径 | 状态 | 备注 |
 |------|------|------|------|
-| 小红书短线策略回测 | `tasks/ashare-xhs-strategy-backtest/` | 进行中 | 量比/跌停抄底/打板，baostock 日线 |
+| 小红书短线策略回测 | `tasks/ashare-xhs-strategy-backtest/` | 进行中 | 日线全市场 + 开盘5分钟量比抽样已出结果 |
 
 状态取值：`进行中` · `已归档` · `已转正`
 

@@ -1,5 +1,16 @@
 # Backtest Summary
 
+## A_open5m_vol_ratio_20_60
+- n_trades: 26
+- win_rate: 0.4615
+- avg_return: 0.0091
+- expectancy: 0.0091
+- avg_win: 0.0779
+- avg_loss: -0.0499
+- profit_factor: 1.3391
+- total_return: 0.0214
+- max_drawdown: -0.1334
+
 ## A_intraday_thresholds_on_daily
 - n_trades: 0
 - win_rate: nan
