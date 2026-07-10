@@ -1,3 +1,6 @@
 {
-
+  "metrics": {},
+  "verdict": "REJECT",
+  "assumption_grade": "weak",
+  "stress": {}
 }

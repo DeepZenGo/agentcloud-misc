@@ -61,9 +61,21 @@ def fill_limit_down_bounce(row: pd.Series, rebound: float = 0.03) -> FillResult:
     return FillResult(True, buy, float(row["next_open"]), "next_open_after_ld")
 
 
+def fill_chase_next_open(row: pd.Series, cost_roundtrip: float = 0.0015) -> FillResult:
+    """EOD-honest path: decide on T after close, buy T+1 open, sell T+2 open."""
+    if pd.isna(row.get("next_open")) or pd.isna(row.get("next2_open")):
+        return FillResult(False, 0.0, 0.0, "missing_chase_price")
+    # if T+1 opens limit-up, likely unfillable chase
+    # approximate: if next_open >= limit_up of signal day * 0.995 and close was limit up
+    buy = float(row["next_open"])
+    sell = float(row["next2_open"])
+    return FillResult(True, buy, sell, "chase_next_open")
+
+
 FILLERS = {
     "next_open": fill_next_open,
     "limit_up_optimistic": fill_limit_up_optimistic,
     "limit_up_conservative": fill_limit_up_conservative,
     "limit_down_bounce": fill_limit_down_bounce,
+    "chase_next_open": fill_chase_next_open,
 }

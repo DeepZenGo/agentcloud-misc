@@ -8,4 +8,9 @@ exit: next_open
 params:
   vol_lo: 3.0
   vol_hi: 8.0
+assumptions:
+  signal_fidelity: low
+  fill_realism: high
+  proxies:
+  - daily_vol_as_open_liangbi
 notes: 负面教材，用于验证防前视检查。

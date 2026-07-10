@@ -1,6 +1,6 @@
 id: H004_limit_up_amount_board
 name: limit_up_amount_board
-claim: '收盘涨停且成交额>=20亿（代理净流入），涨停价买入次日开盘卖； 在保守成交模型下测试集仍正期望。
+claim: '收盘涨停且成交额>=20亿（代理「净流入>20亿」），涨停价买入次日开盘卖； 在保守成交模型下验证/测试仍正期望。
 
   '
 decision_time: close
@@ -10,4 +10,15 @@ exit: next_open
 params:
   min_amount: 2000000000
   top_n: 3
-notes: 成交额≠净流入；保守模型要求盘中曾打开。
+assumptions:
+  signal_fidelity: low
+  fill_realism: low
+  proxies:
+  - amount_as_net_inflow
+  known_biases:
+  - limit_up_queue_uncertainty
+  - eod_signal_cannot_buy_todays_limit
+  accept_limit_up_fill_risk: false
+notes: '成交额≠净流入；收盘才确认的信号无法保证买到当日涨停价。 系统应对此类假设做成交压力测试（次日追开盘）。
+
+  '

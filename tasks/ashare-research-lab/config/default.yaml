@@ -32,3 +32,8 @@ gates:
   min_profit_factor: 1.05
   # val and test must both clear expectancy/PF/DD (avoids test-only luck)
   require_val_pass: true
+  # fill-stress (chase next open) expectancy floor on val/test
+  stress_min_expectancy: -0.002
+
+assumptions_policy:
+  reject_dangerous_proxies: true   # dangerous proxies ⇒ cannot be CANDIDATE

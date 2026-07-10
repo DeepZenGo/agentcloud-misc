@@ -7,4 +7,11 @@ fill_model: limit_down_bounce
 exit: rebound_3pct_or_next_open
 params:
   n_watch: 5
-notes: 小红书跌停抄底的可复现版。
+assumptions:
+  signal_fidelity: low
+  fill_realism: medium
+  proxies:
+    - watchlist_as_discretionary
+  known_biases:
+    - limit_down_exit_liquidity
+notes: 小红书跌停抄底的可复现版；信号弱、流动性差。

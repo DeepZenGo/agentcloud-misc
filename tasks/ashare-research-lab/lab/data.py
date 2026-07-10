@@ -89,6 +89,7 @@ def load_panel(cfg: dict | None = None) -> pd.DataFrame:
     df["next_high"] = df.groupby("code")["high"].shift(-1)
     df["next_low"] = df.groupby("code")["low"].shift(-1)
     df["next_close"] = df.groupby("code")["close"].shift(-1)
+    df["next2_open"] = df.groupby("code")["open"].shift(-2)
 
     if open5_path is not None:
         o5 = pd.read_parquet(open5_path)

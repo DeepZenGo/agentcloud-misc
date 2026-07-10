@@ -1,30 +1,38 @@
 [
   {
     "id": "H001_open_gap_hot_no_lookahead",
-    "test_n": 107.0,
-    "test_exp": 0.0038610129,
-    "test_dd": -0.1719714738,
-    "report": "/workspace/tasks/ashare-research-lab/results/H001_open_gap_hot_no_lookahead/report.md"
+    "report": "/workspace/tasks/ashare-research-lab/results/H001_open_gap_hot_no_lookahead/report.md",
+    "verdict": "REJECT",
+    "test_n": 107,
+    "test_exp": 0.003861012937067723,
+    "test_dd": -0.17197147378217081,
+    "assumption_grade": "honest"
   },
   {
     "id": "H002_lookahead_bad_demo",
+    "report": "/workspace/tasks/ashare-research-lab/results/H002_lookahead_bad_demo/report.md",
+    "verdict": "REJECT",
     "test_n": null,
     "test_exp": null,
     "test_dd": null,
-    "report": "/workspace/tasks/ashare-research-lab/results/H002_lookahead_bad_demo/report.md"
+    "assumption_grade": "weak"
   },
   {
     "id": "H003_limit_down_bounce",
-    "test_n": 1.0,
-    "test_exp": -0.0346288344,
+    "report": "/workspace/tasks/ashare-research-lab/results/H003_limit_down_bounce/report.md",
+    "verdict": "REJECT",
+    "test_n": 1,
+    "test_exp": -0.03462883435582825,
     "test_dd": 0.0,
-    "report": "/workspace/tasks/ashare-research-lab/results/H003_limit_down_bounce/report.md"
+    "assumption_grade": "weak"
   },
   {
     "id": "H004_limit_up_amount_board",
-    "test_n": 277.0,
-    "test_exp": 0.009907904,
-    "test_dd": -0.089188663,
-    "report": "/workspace/tasks/ashare-research-lab/results/H004_limit_up_amount_board/report.md"
+    "report": "/workspace/tasks/ashare-research-lab/results/H004_limit_up_amount_board/report.md",
+    "verdict": "REJECT",
+    "test_n": 277,
+    "test_exp": 0.009907903986728674,
+    "test_dd": -0.08918866300014316,
+    "assumption_grade": "weak"
   }
 ]

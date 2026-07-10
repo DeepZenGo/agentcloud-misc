@@ -66,9 +66,20 @@ python cli.py run-all
 3. `python cli.py run hypotheses/H00X_....yaml`
 4. 只有 **lint + test gates** 都过，才叫候选；然后才谈模拟盘
 
+## 判定等级
+
+| 等级 | 含义 |
+|------|------|
+| `REJECT` | lint / 假设 / 指标 / 成交压力测试未过 |
+| `WEAK_CANDIDATE` | 数字勉强过，但代理指标或成交假设偏弱 |
+| `CANDIDATE` | 假设相对诚实，且 val+test 过门禁 |
+
+只看收益曲线不够：`amount` 冒充净流入、默认买到涨停，最多 `WEAK_CANDIDATE`，默认进不了 `CANDIDATE`。
+
 ## 门禁（默认）
 
 - 测试集成交笔数 ≥ 30；验证集 ≥ 15
 - **验证集与测试集**期望值都 > 0、盈亏比 ≥ 1.05、最大回撤优于 -35%
-- 训练集期望为负会警告（防止「只有最近一段好运」）
+- 危险代理（如成交额当净流入）⇒ 不能当 CANDIDATE
+- 涨停成交模型会强制跑 **次日开盘追价** 压力测试
 - 前视 lint 失败直接 REJECT（除非 `--force`）

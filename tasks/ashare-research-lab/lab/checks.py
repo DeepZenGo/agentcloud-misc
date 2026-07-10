@@ -20,7 +20,7 @@ OPEN_UNSAFE = {
 }
 
 # Always future
-ALWAYS_FUTURE = {"next_open", "next_high", "next_low", "next_close"}
+ALWAYS_FUTURE = {"next_open", "next_high", "next_low", "next_close", "next2_open"}
 
 
 @dataclass
