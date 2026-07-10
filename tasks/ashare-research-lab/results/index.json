@@ -1,7 +1,7 @@
 [
   {
     "id": "H001_open_gap_hot_no_lookahead",
-    "report": "/workspace/tasks/ashare-research-lab/results/H001_open_gap_hot_no_lookahead/report.md",
+    "report": "results/H001_open_gap_hot_no_lookahead/report.md",
     "verdict": "REJECT",
     "test_n": 107,
     "test_exp": 0.003861012937067723,
@@ -10,7 +10,7 @@
   },
   {
     "id": "H002_lookahead_bad_demo",
-    "report": "/workspace/tasks/ashare-research-lab/results/H002_lookahead_bad_demo/report.md",
+    "report": "results/H002_lookahead_bad_demo/report.md",
     "verdict": "REJECT",
     "test_n": null,
     "test_exp": null,
@@ -19,7 +19,7 @@
   },
   {
     "id": "H003_limit_down_bounce",
-    "report": "/workspace/tasks/ashare-research-lab/results/H003_limit_down_bounce/report.md",
+    "report": "results/H003_limit_down_bounce/report.md",
     "verdict": "REJECT",
     "test_n": 1,
     "test_exp": -0.03462883435582825,
@@ -28,7 +28,7 @@
   },
   {
     "id": "H004_limit_up_amount_board",
-    "report": "/workspace/tasks/ashare-research-lab/results/H004_limit_up_amount_board/report.md",
+    "report": "results/H004_limit_up_amount_board/report.md",
     "verdict": "REJECT",
     "test_n": 277,
     "test_exp": 0.009907903986728674,
@@ -37,15 +37,11 @@
   },
   {
     "id": "H005_gap_down_after_up_market",
-    "report": "/workspace/tasks/ashare-research-lab/results/H005_gap_down_after_up_market/report.md",
+    "report": "results/H005_gap_down_after_up_market/report.md",
     "verdict": "CANDIDATE",
     "test_n": 99,
     "test_exp": 0.0039836569949440095,
     "test_dd": -0.13386029654388876,
     "assumption_grade": "honest"
-  },
-  {
-    "id": "H005_run_log.txt",
-    "report": "/workspace/tasks/ashare-research-lab/results/H005_run_log.txt/report.md"
   }
 ]

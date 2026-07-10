@@ -236,7 +236,7 @@ def cmd_run_all(args) -> None:
         except SystemExit as e:
             codes.append(int(e.code or 0))
     index = []
-    for d in sorted((ROOT / "results").glob("H*")):
+    for d in sorted(p for p in (ROOT / "results").glob("H*") if p.is_dir()):
         met = d / "metrics.json"
         verd = d / "verdict.txt"
         entry = {"id": d.name, "report": str(d / "report.md")}
