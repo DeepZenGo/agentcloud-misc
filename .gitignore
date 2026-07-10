@@ -1,0 +1,32 @@
+# OS junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.egg
+
+# Secrets — NEVER commit
+.env
+*.env.local
+*.env.*.local
+**/configs/*.secret.*
+*.pem
+*.key
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Node
+node_modules/
+
+# Archives (kept locally)
+archived/
