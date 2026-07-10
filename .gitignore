@@ -30,3 +30,8 @@ node_modules/
 
 # Archives (kept locally)
 archived/
+
+# Large market data caches
+tasks/**/data/bars/
+tasks/**/data/panel_daily.parquet
+tasks/**/__pycache__/
