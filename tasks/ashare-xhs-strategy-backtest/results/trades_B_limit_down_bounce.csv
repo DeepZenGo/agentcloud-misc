@@ -1,0 +1,5 @@
+strategy,date,code,name,industry,buy,sell,hold,ret,equity_after
+B_limit_down_bounce,2024-02-06,sz.000908,石药景峰,C27医药制造业,1.51,1.5553000000000001,intraday_rebound,0.028500000000000025,1005700.0
+B_limit_down_bounce,2024-02-08,sh.603363,傲农生物,C13农副食品加工业,2.38,2.4514,intraday_rebound,0.028500000000000025,1011432.49
+B_limit_down_bounce,2024-02-08,sz.002217,ST合力泰,C39计算机、通信和其他电子设备制造业,0.99,1.0197,intraday_rebound,0.028500000000000025,1017164.98
+B_limit_down_bounce,2025-12-23,sz.001330,博纳影业,R87广播、电视、电影和录音制作业,8.15,7.88,next_open,-0.03462883435582825,1010120.3324790061

@@ -52,6 +52,12 @@ def load_panel(path: Path | None = None) -> pd.DataFrame:
     df["next_high"] = df.groupby("code")["high"].shift(-1)
     df["next_low"] = df.groupby("code")["low"].shift(-1)
     df["next_close"] = df.groupby("code")["close"].shift(-1)
+    # optional open 5-min volume ratio (closer to 09:30 量比)
+    open5_path = DATA_DIR / "panel_open5m.parquet"
+    if open5_path.exists():
+        o5 = pd.read_parquet(open5_path)
+        o5["date"] = pd.to_datetime(o5["date"])
+        df = df.merge(o5[["date", "code", "open_vol_ratio"]], on=["date", "code"], how="left")
     # IPO filter: listed >= 60 calendar days before bar
     if "ipoDate" in df.columns:
         ipo = pd.to_datetime(df["ipoDate"], errors="coerce")
@@ -81,22 +87,26 @@ def run_strategy_a(
     top_n: int = 3,
     hot_k: int = 3,
     initial_cash: float = 1_000_000.0,
+    tag: str = "A_vol_ratio_hot",
+    vol_col: str = "vol_ratio",
 ) -> tuple[pd.DataFrame, dict]:
-    """量比+热点：用全日量比代理 09:30 量比（有前视偏差，结果偏乐观）。"""
+    """量比+热点。默认阈值对应分时量比；日线代理请改用更低阈值。"""
     trades = []
     cash = initial_cash
     dates = sorted(panel["date"].unique())
     by_date = {d: g for d, g in panel.groupby("date")}
+    if vol_col not in panel.columns:
+        raise KeyError(f"missing vol_col={vol_col}")
 
     for d in dates:
         day = by_date[d]
-        # NOTE: vol_ratio uses same-day volume → look-ahead vs true 09:30 signal.
         hot = hot_industries(day, top_k=hot_k)
         if not hot:
             continue
+        # If using same-day daily vol_ratio there is look-ahead vs 09:30.
         cand = day[
-            (day["vol_ratio"] >= vol_lo)
-            & (day["vol_ratio"] <= vol_hi)
+            (day[vol_col] >= vol_lo)
+            & (day[vol_col] <= vol_hi)
             & (day["open_ret"] >= open_lo)
             & (day["open_ret"] <= open_hi)
             & (day["industry"].isin(hot))
@@ -105,7 +115,7 @@ def run_strategy_a(
         ].copy()
         if cand.empty:
             continue
-        cand = cand.sort_values("vol_ratio", ascending=False).head(top_n)
+        cand = cand.sort_values(vol_col, ascending=False).head(top_n)
         w = 1.0 / len(cand)
         day_cash = cash
         day_pnl = 0.0
@@ -117,12 +127,12 @@ def run_strategy_a(
             day_pnl += pnl
             trades.append(
                 {
-                    "strategy": "A_vol_ratio_hot",
+                    "strategy": tag,
                     "date": d,
                     "code": r["code"],
                     "name": r.get("code_name", ""),
                     "industry": r.get("industry", ""),
-                    "vol_ratio": float(r["vol_ratio"]),
+                    "vol_ratio": float(r[vol_col]),
                     "buy": buy,
                     "sell": sell,
                     "ret": ret,
@@ -214,26 +224,36 @@ def run_strategy_b(
     panel: pd.DataFrame,
     rebound: float = 0.03,
     initial_cash: float = 1_000_000.0,
+    mode: str = "watchlist5",
 ) -> tuple[pd.DataFrame, dict]:
-    """开盘跌停抄底：规则化 5 只自选，开盘跌停买入，反弹 R% 或次日开盘卖。"""
+    """开盘跌停抄底。
+    mode=watchlist5: 规则化5只自选（昨5日跌幅、行业分散）
+    mode=all_open_ld: 当日所有开盘跌停（更宽，对照用）
+    """
     trades = []
     cash = initial_cash
     dates = sorted(panel["date"].unique())
     by_date = {d: g for d, g in panel.groupby("date")}
+    tag = "B_limit_down_bounce" if mode == "watchlist5" else "B_all_open_limit_down"
 
     for i, d in enumerate(dates):
         if i == 0:
             continue
         prev = by_date[dates[i - 1]]
         day = by_date[d]
-        watch = set(build_watchlist(prev, n=5))
-        if not watch:
-            continue
-        hits = day[
-            (day["code"].isin(watch))
-            & (day["is_limit_down_open"])
-            & (day["next_open"].notna())
-        ]
+        if mode == "watchlist5":
+            watch = set(build_watchlist(prev, n=5))
+            if not watch:
+                continue
+            hits = day[
+                (day["code"].isin(watch))
+                & (day["is_limit_down_open"])
+                & (day["next_open"].notna())
+            ]
+        else:
+            hits = day[(day["is_limit_down_open"]) & (day["next_open"].notna())]
+            # cap daily names to avoid pathological concentration
+            hits = hits.sort_values("ret_5d").head(5)
         if hits.empty:
             continue
         w = min(0.2, 1.0 / len(hits))
@@ -241,7 +261,6 @@ def run_strategy_b(
         day_pnl = 0.0
         for _, r in hits.iterrows():
             buy = float(r["open"])
-            # same-day rebound using high; if high >= buy*(1+R) assume fill at target
             target = buy * (1.0 + rebound)
             if float(r["high"]) >= target - 1e-9:
                 sell = target
@@ -249,12 +268,11 @@ def run_strategy_b(
             else:
                 sell = float(r["next_open"])
                 hold = "next_open"
-                # if still limit-down next open and couldn't sell — still mark next_open
             ret = sell / buy - 1.0 - FEE_ROUNDTRIP
             day_pnl += day_cash * w * ret
             trades.append(
                 {
-                    "strategy": "B_limit_down_bounce",
+                    "strategy": tag,
                     "date": d,
                     "code": r["code"],
                     "name": r.get("code_name", ""),
@@ -343,13 +361,24 @@ def main() -> None:
     results = {}
     all_trades = []
 
-    for name, fn in [
-        ("A_vol_ratio_hot_lookahead", lambda: run_strategy_a(panel)),
+    jobs = [
+        # 原文量比20-60是分时口径；日线几乎触发不了，仍跑一遍作对照
+        ("A_intraday_thresholds_on_daily", lambda: run_strategy_a(
+            panel, 20, 60, tag="A_intraday_thr_on_daily", vol_col="vol_ratio")),
+        # 日线极端放量代理（约对应日线量比高分位）
+        ("A_daily_vol_proxy_3_8", lambda: run_strategy_a(
+            panel, 3, 8, tag="A_daily_vol_proxy_3_8", vol_col="vol_ratio")),
         ("A_no_lookahead", lambda: run_strategy_a_no_lookahead(panel)),
-        ("B_limit_down_bounce", lambda: run_strategy_b(panel)),
+        ("B_limit_down_bounce", lambda: run_strategy_b(panel, mode="watchlist5")),
+        ("B_all_open_limit_down", lambda: run_strategy_b(panel, mode="all_open_ld")),
         ("C_limit_up_optimistic", lambda: run_strategy_c(panel, fill_mode="optimistic")),
         ("C_limit_up_conservative", lambda: run_strategy_c(panel, fill_mode="conservative")),
-    ]:
+    ]
+    if "open_vol_ratio" in panel.columns and panel["open_vol_ratio"].notna().any():
+        jobs.insert(0, ("A_open5m_vol_ratio_20_60", lambda: run_strategy_a(
+            panel, 20, 60, tag="A_open5m_vol_ratio_20_60", vol_col="open_vol_ratio")))
+
+    for name, fn in jobs:
         print(f"running {name} ...")
         trades, perf = fn()
         results[name] = perf

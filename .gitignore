@@ -33,5 +33,7 @@ archived/
 
 # Large market data caches
 tasks/**/data/bars/
+tasks/**/data/open5m/
 tasks/**/data/panel_daily.parquet
+tasks/**/data/panel_open5m.parquet
 tasks/**/__pycache__/
