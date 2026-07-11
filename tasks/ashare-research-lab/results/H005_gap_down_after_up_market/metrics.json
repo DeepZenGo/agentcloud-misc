@@ -1,0 +1,46 @@
+{
+  "metrics": {
+    "train": {
+      "n_signals": 370,
+      "n_trades": 370,
+      "fill_rate": 1.0,
+      "win_rate": 0.4783783783783784,
+      "avg_return": 0.002851321953265668,
+      "expectancy": 0.002851321953265668,
+      "avg_win": 0.05270149866811351,
+      "avg_loss": -0.04286619762459998,
+      "profit_factor": 1.127519238640424,
+      "total_return": 0.47862242662583077,
+      "max_drawdown": -0.3147559120506944
+    },
+    "val": {
+      "n_signals": 93,
+      "n_trades": 93,
+      "fill_rate": 1.0,
+      "win_rate": 0.43010752688172044,
+      "avg_return": 0.002116147233438605,
+      "expectancy": 0.002116147233438605,
+      "avg_win": 0.05408855912473852,
+      "avg_loss": -0.037108314571316046,
+      "profit_factor": 1.1000648918709082,
+      "total_return": 0.03985290657286944,
+      "max_drawdown": -0.20181966964861175
+    },
+    "test": {
+      "n_signals": 99,
+      "n_trades": 99,
+      "fill_rate": 1.0,
+      "win_rate": 0.48484848484848486,
+      "avg_return": 0.0039836569949440095,
+      "expectancy": 0.0039836569949440095,
+      "avg_win": 0.042830802875745304,
+      "avg_loss": -0.03257836265757486,
+      "profit_factor": 1.2373655578323404,
+      "total_return": 0.11592877607966989,
+      "max_drawdown": -0.13386029654388876
+    }
+  },
+  "verdict": "CANDIDATE",
+  "assumption_grade": "honest",
+  "stress": {}
+}

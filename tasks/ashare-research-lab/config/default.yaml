@@ -1,0 +1,39 @@
+# Default research-lab config
+data:
+  # Prefer local cache; fall back to sibling xhs task cache
+  panel_candidates:
+    - ./data/panel_daily.parquet
+    - ../ashare-xhs-strategy-backtest/data/panel_daily.parquet
+  open5m_candidates:
+    - ./data/panel_open5m.parquet
+    - ../ashare-xhs-strategy-backtest/data/panel_open5m.parquet
+  universe_candidates:
+    - ./data/meta/universe.parquet
+    - ../ashare-xhs-strategy-backtest/data/meta/universe.parquet
+
+costs:
+  roundtrip: 0.0015   # commission + stamp approx
+
+fills:
+  default: next_open  # signal at T open/close → fill model name
+
+splits:
+  # Purge gap (calendar days) between train end and test start
+  purge_days: 5
+  # Default holdout: last 20% of trading days as test
+  test_ratio: 0.20
+  val_ratio: 0.15
+
+gates:
+  min_trades_test: 30
+  min_trades_val: 15
+  max_drawdown: -0.35
+  min_expectancy: 0.0
+  min_profit_factor: 1.05
+  # val and test must both clear expectancy/PF/DD (avoids test-only luck)
+  require_val_pass: true
+  # fill-stress (chase next open) expectancy floor on val/test
+  stress_min_expectancy: -0.002
+
+assumptions_policy:
+  reject_dangerous_proxies: true   # dangerous proxies ⇒ cannot be CANDIDATE

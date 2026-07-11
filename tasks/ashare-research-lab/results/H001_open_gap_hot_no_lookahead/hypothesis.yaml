@@ -1,0 +1,22 @@
+id: H001_open_gap_hot_no_lookahead
+name: open_gap_hot_no_lookahead
+claim: '开盘涨幅 2%–7% + 昨量比>=1.5 + 开盘热点行业 Top3，次日开盘卖， 在扣费后对验证集与测试集仍有正期望。
+
+  '
+decision_time: open
+strategy: open_gap_hot_no_lookahead
+fill_model: next_open
+exit: next_open
+params:
+  open_lo: 0.02
+  open_hi: 0.07
+  prev_vol_lo: 1.5
+  top_n: 3
+  hot_k: 3
+assumptions:
+  signal_fidelity: medium
+  fill_realism: high
+  proxies: []
+  known_biases:
+  - hot_industry_by_open_ret_is_contemporaneous
+notes: 无前视；成交用次日开盘，相对可执行。

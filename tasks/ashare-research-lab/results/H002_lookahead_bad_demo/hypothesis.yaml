@@ -1,0 +1,16 @@
+id: H002_lookahead_bad_demo
+name: open_gap_hot_lookahead_bad
+claim: 用当日收盘量比在开盘决策（故意错误）——应被 lint 拒绝。
+decision_time: open
+strategy: open_gap_hot_lookahead_bad
+fill_model: next_open
+exit: next_open
+params:
+  vol_lo: 3.0
+  vol_hi: 8.0
+assumptions:
+  signal_fidelity: low
+  fill_realism: high
+  proxies:
+  - daily_vol_as_open_liangbi
+notes: 负面教材，用于验证防前视检查。

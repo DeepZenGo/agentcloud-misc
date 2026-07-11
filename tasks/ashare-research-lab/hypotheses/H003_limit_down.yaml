@@ -1,0 +1,17 @@
+id: H003_limit_down_bounce
+name: limit_down_bounce_watchlist
+claim: 规则化5只超跌自选，开盘跌停买入，反弹3%或次日开盘卖，测试集正期望。
+decision_time: open
+strategy: limit_down_bounce_watchlist
+fill_model: limit_down_bounce
+exit: rebound_3pct_or_next_open
+params:
+  n_watch: 5
+assumptions:
+  signal_fidelity: low
+  fill_realism: medium
+  proxies:
+    - watchlist_as_discretionary
+  known_biases:
+    - limit_down_exit_liquidity
+notes: 小红书跌停抄底的可复现版；信号弱、流动性差。

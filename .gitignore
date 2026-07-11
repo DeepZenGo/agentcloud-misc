@@ -28,5 +28,12 @@ venv/
 # Node
 node_modules/
 
-# Archives (kept locally)
-archived/
+# Large market data caches
+tasks/**/data/bars/
+tasks/**/data/open5m/
+tasks/**/data/panel_daily.parquet
+tasks/**/data/panel_open5m.parquet
+tasks/**/__pycache__/
+tasks/**/lab/__pycache__/
+tasks/**/strategies/__pycache__/
+tasks/**/results/**/trades_*.csv

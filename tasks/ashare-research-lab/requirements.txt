@@ -1,0 +1,5 @@
+baostock>=0.8.9
+pandas>=2.0
+numpy>=1.24
+pyarrow>=14.0
+pyyaml>=6.0

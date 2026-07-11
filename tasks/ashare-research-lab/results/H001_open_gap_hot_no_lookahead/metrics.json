@@ -1,0 +1,46 @@
+{
+  "metrics": {
+    "train": {
+      "n_signals": 289,
+      "n_trades": 289,
+      "fill_rate": 1.0,
+      "win_rate": 0.356401384083045,
+      "avg_return": -0.006382254712911516,
+      "expectancy": -0.006382254712911516,
+      "avg_win": 0.06480556771009657,
+      "avg_loss": -0.04580346820522245,
+      "profit_factor": 0.7834986206994461,
+      "total_return": -0.7917699827305542,
+      "max_drawdown": -0.7935643846181045
+    },
+    "val": {
+      "n_signals": 86,
+      "n_trades": 86,
+      "fill_rate": 1.0,
+      "win_rate": 0.313953488372093,
+      "avg_return": -0.00973863797965938,
+      "expectancy": -0.00973863797965938,
+      "avg_win": 0.06897085276116842,
+      "avg_loss": -0.045758235437326336,
+      "profit_factor": 0.6897760002731866,
+      "total_return": -0.285590537742049,
+      "max_drawdown": -0.4390220944328299
+    },
+    "test": {
+      "n_signals": 107,
+      "n_trades": 107,
+      "fill_rate": 1.0,
+      "win_rate": 0.5233644859813084,
+      "avg_return": 0.003861012937067723,
+      "expectancy": 0.003861012937067723,
+      "avg_win": 0.04558469237077099,
+      "avg_loss": -0.04195322330386135,
+      "profit_factor": 1.1930854393610935,
+      "total_return": 0.015979990532278165,
+      "max_drawdown": -0.17197147378217081
+    }
+  },
+  "verdict": "REJECT",
+  "assumption_grade": "honest",
+  "stress": {}
+}

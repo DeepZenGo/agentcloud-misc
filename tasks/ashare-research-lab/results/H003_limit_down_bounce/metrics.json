@@ -1,0 +1,47 @@
+{
+  "metrics": {
+    "train": {
+      "n_signals": 3,
+      "n_trades": 3,
+      "fill_rate": 1.0,
+      "win_rate": 1.0,
+      "avg_return": 0.028500000000000025,
+      "expectancy": 0.028500000000000025,
+      "avg_win": 0.028500000000000025,
+      "avg_loss": NaN,
+      "profit_factor": NaN,
+      "total_return": 0.05781225000000001,
+      "max_drawdown": 0.0
+    },
+    "val": {
+      "n_signals": 0,
+      "n_trades": 0,
+      "fill_rate": NaN,
+      "win_rate": NaN,
+      "avg_return": NaN,
+      "expectancy": NaN,
+      "avg_win": NaN,
+      "avg_loss": NaN,
+      "profit_factor": NaN,
+      "total_return": 0.0,
+      "max_drawdown": 0.0,
+      "n_unfilled": 0
+    },
+    "test": {
+      "n_signals": 1,
+      "n_trades": 1,
+      "fill_rate": 1.0,
+      "win_rate": 0.0,
+      "avg_return": -0.03462883435582825,
+      "expectancy": -0.03462883435582825,
+      "avg_win": NaN,
+      "avg_loss": -0.03462883435582825,
+      "profit_factor": 0.0,
+      "total_return": -0.0346288343558282,
+      "max_drawdown": 0.0
+    }
+  },
+  "verdict": "REJECT",
+  "assumption_grade": "weak",
+  "stress": {}
+}
