@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #eef2f4;
+  --color-bg-deep: #e4ebe9;
+  --color-ink: #0f1720;
+  --color-ink-muted: #5b6770;
+  --color-teal: #0a7a6a;
+  --color-teal-soft: #d7efe9;
+  --color-fast: #3d5a73;
+  --color-fast-soft: #d9e4ed;
+  --color-warn: #c45c26;
+  --color-warn-soft: #f3e0d4;
+  --color-glass: rgba(255, 255, 255, 0.62);
+  --color-glass-border: rgba(255, 255, 255, 0.45);
+  --font-sans: system-ui, -apple-system, "SF Pro Text", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, #cfe8e2 0%, transparent 55%),
+      radial-gradient(900px 500px at 100% 0%, #d5e2ef 0%, transparent 50%),
+      linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-deep) 100%);
+    background-attachment: fixed;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .glass {
+      background: #ffffff !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--color-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--color-glass-border);
+  }
+
+  .pressable {
+    transition: transform 100ms ease-out;
+  }
+
+  .pressable:active {
+    transform: scale(0.97);
+  }
+
+  .display-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+}

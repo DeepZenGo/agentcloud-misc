@@ -30,3 +30,5 @@ node_modules/
 
 # Archives (kept locally)
 archived/
+node_modules/
+dist/
