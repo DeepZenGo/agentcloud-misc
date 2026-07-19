@@ -120,4 +120,4 @@ mv scripts/2026-01-* archived/2026-Q2/
 |------|------|------|
 | [moon-bridge](../moon-bridge/) | `~/Projects/infra/moon-bridge/` | 协议转换与模型路由代理 |
 | [video-extract](../video-extract/) | `~/Projects/infra/video-extract/` | 视频/音频提取工具 |
-| [fat-loss-board](../../_misc/fat-loss-board/) | `~/Projects/_misc/fat-loss-board/` | 减脂作息看板（已转正） |
+| [fat-loss-board](https://github.com/DeepZenGo/fat-loss-board) | `~/Projects/_misc/fat-loss-board/` | 减脂作息看板（已转正） |
