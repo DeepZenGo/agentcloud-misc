@@ -12,8 +12,9 @@ npm install
 npm run dev
 ```
 
-- 页面：http://127.0.0.1:5173
-- API：http://127.0.0.1:8787/api/status
+- 本机：http://127.0.0.1:5173
+- Tailscale / 局域网：`http://<本机-tailscale-ip>:5173`（dev server 监听 `0.0.0.0`）
+- API：http://127.0.0.1:8787/api/status（页面经 Vite 代理 `/api`，一般无需直连）
 
 可选环境变量：
 
@@ -21,6 +22,7 @@ npm run dev
 |------|------|------|
 | `HABIT_LOG_FILE` | `~/.hermes/habit-track/daily-log.json` | 打卡 JSON 路径 |
 | `PORT` | `8787` | API 端口 |
+| `HOST` | `0.0.0.0` | API 绑定地址 |
 
 对照 CLI：
 

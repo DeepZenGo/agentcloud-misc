@@ -21,6 +21,7 @@ const LOG_FILE =
   path.join(os.homedir(), '.hermes', 'habit-track', 'daily-log.json')
 
 const PORT = Number(process.env.PORT || 8787)
+const HOST = process.env.HOST || '0.0.0.0'
 
 function loadLogs(): DayLog[] {
   try {
@@ -75,7 +76,7 @@ app.get('/api/status', (_req, res) => {
   res.json(buildStatus())
 })
 
-app.listen(PORT, () => {
-  console.log(`[fat-loss-board] API http://127.0.0.1:${PORT}`)
+app.listen(PORT, HOST, () => {
+  console.log(`[fat-loss-board] API http://${HOST}:${PORT}`)
   console.log(`[fat-loss-board] log  ${LOG_FILE}`)
 })
