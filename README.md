@@ -108,7 +108,7 @@ mv scripts/2026-01-* archived/2026-Q2/
 
 | 任务 | 路径 | 状态 | 备注 |
 |------|------|------|------|
-| 减脂作息看板 | `tasks/fat-loss-board/` | 进行中 | 本机网页展示 daily-log；`npm run dev` |
+| 减脂作息看板 | — | 已转正 | 迁至 `~/Projects/_misc/fat-loss-board` |
 
 状态取值：`进行中` · `已归档` · `已转正`
 
@@ -120,3 +120,4 @@ mv scripts/2026-01-* archived/2026-Q2/
 |------|------|------|
 | [moon-bridge](../moon-bridge/) | `~/Projects/infra/moon-bridge/` | 协议转换与模型路由代理 |
 | [video-extract](../video-extract/) | `~/Projects/infra/video-extract/` | 视频/音频提取工具 |
+| [fat-loss-board](../../_misc/fat-loss-board/) | `~/Projects/_misc/fat-loss-board/` | 减脂作息看板（已转正） |
