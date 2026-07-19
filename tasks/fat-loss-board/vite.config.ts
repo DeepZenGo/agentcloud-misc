@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    host: true, // 0.0.0.0 — Tailscale / LAN 可访问
+    host: '0.0.0.0', // 明确 IPv4，方便 Tailscale / 手机访问
     port: 5173,
     strictPort: true,
     allowedHosts: true,
@@ -17,7 +17,7 @@ export default defineConfig({
     },
   },
   preview: {
-    host: true,
+    host: '0.0.0.0',
     port: 5173,
     strictPort: true,
     allowedHosts: true,

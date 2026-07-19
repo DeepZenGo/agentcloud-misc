@@ -10,7 +10,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "start:api": "tsx server/index.ts"
+    "start": "npm run build && PORT=5173 SERVE_STATIC=1 tsx server/index.ts",
+    "start:api": "tsx server/index.ts",
+    "start:static": "PORT=5173 SERVE_STATIC=1 tsx server/index.ts"
   },
   "dependencies": {
     "cors": "^2.8.6",
